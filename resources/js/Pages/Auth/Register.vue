@@ -47,7 +47,7 @@ const submit = () => {
                 </form>
                <p class="alerdy_account">Don't have an account? <Link href="/login"> Sign In</Link> </p>
             </div>
-            <p class="privacy_text"><a href="#" class="">Privacy Policy</a> and <a href="#">Terms of Service</a></p>
+            <p class="privacy_text"><a href="/privacy-policy" class="">Privacy Policy</a> and <a href="/terms">Terms of Service</a></p>
          </div>
          <div class="right_div_imgs">
             <div class="img_rights">

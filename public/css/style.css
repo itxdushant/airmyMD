@@ -114,7 +114,8 @@ body{
 }
 
 td.insurance-img img {
-    width: 100px;
+    width: 50px;
+    height:50px;
 }
 a.btn_history {
     margin-top: 4px;
@@ -2764,22 +2765,23 @@ input:checked + .slider:before{
 /* css chat here */
 .chat_section {
     display: flex;
+    height: 83vh;
 }
 .chat_section .left_side{
         border-radius: 5px;
         padding: 15px;
         width: 35%;
         background-color: #363636;
-        height: 100vh;
+        height: 83vh;
         overflow: auto;
 }
 .chat_section .right_side{
     width: 65%;
     padding: 30px 15px;
-    overflow: auto;
+    /* overflow: auto; */
 }
 .chat_section .body_msg{
-      height: calc(100vh - 95px);
+      height: calc(100vh - 200px);
       overflow:auto;
 }
 .left_side .serch_bar{
@@ -3340,7 +3342,7 @@ a.arrow-btn.btn-prevmonth{
 /* css blank msg here */
 .right_chat_blnk{
     padding: 15px 30px;
-    width: 100%;
+    width: 65%;
 }
 .active_prson{
     position: relative;
@@ -3459,7 +3461,7 @@ span.verify_account {
 
 /* Review section */
 .card_review_section {
-    width: 80%;
+    width:80%;
     padding: 20px;
 }
 .card_review{
@@ -3551,3 +3553,32 @@ label:hover ~ input:checked ~ label  { color: orange;  }
    margin-bottom: 0px;
 }
 /* Review section end*/
+
+.rating_div.profile_rating {
+    position:relative;
+    width: 100%;
+    justify-content:flex-end;
+}
+.rating_div.profile_rating .rate > label:before{
+    font-size:20px;
+}
+.rating_div.profile_rating span.total_rating {
+    position: absolute;
+    top: 8px;
+    right: -30px;
+}
+.rating_div.profile_rating{
+    margin-top:0px;
+}
+.right_star_rt {
+    display: flex;
+    flex-direction: column;
+}
+h4.name_reviewer {
+    margin-bottom: 0px;
+    font-size: 18px;
+    font-weight: 700;
+}
+.pb-50{
+    padding-bottom: 70px;
+}

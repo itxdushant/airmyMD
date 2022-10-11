@@ -124,8 +124,8 @@ class ChatController extends Controller
                 $query->where('from', $user_id);
             })->orderBy('created_at', 'ASC')->simplePaginate(20); 
             $message = $message->groupBy('date')->reverse();
-
-            broadcast(new MessageSent($user, ['message' => $message]));
+            
+            broadcast(new MessageSent($$user_id, ['message' => $message], $request->text_msg));
             // $message = $user->messages()->create([
             //     'message' => $request->input('message')
             // ]);
@@ -149,6 +149,7 @@ class ChatController extends Controller
         $user = Auth::user();
         $current_id =  $user->id;
         $user_id = $request->user_id;
+        //Message::where('to', auth()->user()->id)->where('from', $user_id);
         $offset = (isset($request->page) && $request->page>0)? $request->page: 0;
         $message = Message::selectRaw("*, DATE_FORMAT(created_at, '%Y-%m-%e') date")->orderBy('date', 'DESC')->where(function($query) use ($user_id, $current_id){
             $query->where('from', $current_id);

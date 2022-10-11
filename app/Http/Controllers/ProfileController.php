@@ -50,7 +50,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $rating = round($user->average_rating);
-        $average_rating = number_format($user->average_rating,2);
+        $average_rating = number_format($user->average_rating,1);
         //$userRating = User::with('reviews')->where(['user_type' => 'doctor', 'id' => $id])->first();
         $profile = Profile::withCount('reviews')->where(['user_id' => $user->id])->first();
          if($profile){
@@ -66,7 +66,7 @@ class ProfileController extends Controller
     public function updateProfile(Request $request)
     {
         
-        $input = $request->only('image', 'bio', 'specialize', 'telemedicine', 'insurances','other_insurance', 'tags', 'male', 'female', 'other', 'fees');
+        $input = $request->only('image', 'bio', 'specialize', 'telemedicine', 'insurances', 'other_insurance', 'tags', 'male', 'female', 'other', 'fees');
         $validator = Validator::make($request->all(), [ 
             'bio' => 'required',
             'specialize' => 'required',
@@ -76,8 +76,9 @@ class ProfileController extends Controller
             
         ]);
         if ($validator->fails()) { 
-            return response(['message'=>$validator->errors()->first(), 'code'=>200], 200);         
-        }
+	        	return response(['message'=>$validator->errors()->first(), 'code'=>200], 200);         
+	    }
+	        
         $input['patients_gender'] = @serialize([
             'male' => @$input['male'],
             'female' => @$input['female'],
@@ -90,14 +91,16 @@ class ProfileController extends Controller
         if($request->has('insurances')) {
             $input['insurance'] = implode(',', $input['insurances']);
         }
-        if (in_array("Other", $input['other_insurance'])){
+        
+        if (in_array("Other", $input['insurances'])){
             $input['other_insurance'] = implode(',', $input['other_insurance']);
         }
+        
         if($request->has('tags')) {
             $input['tags'] = implode(',', $input['tags']);
         }
 
-        if($request->image){            
+        if($request->image && !empty($request->image) ){            
             $img = $request->image;
             $folderPath = "storage/uploads/images/"; //path location
             
@@ -119,6 +122,7 @@ class ProfileController extends Controller
             "status" => $result ? false : true,
             "message" => "Profile updated successfully."
         ]);
+
 
     }
 

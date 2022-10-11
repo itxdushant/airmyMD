@@ -52,19 +52,19 @@
                                     <div class="specialization_card">
                                         <div class="box_card">
                                             <label>
-                                                <input type="checkbox" disabled name="product" class="card-input-element" value="Primary Care Physican" v-model="form.specialize">
+                                                <input type="checkbox" disabled name="product" class="card-input-element" value="Primary Care Primary Care Physician" v-model="form.specialize">
                                                 <div class="panel panel-default card-input">
-                                                    <img src="/uploads/specializations/icon_physician.png">
-                                                    <h5>Primary Care Physican</h5>
+                                                    <img src="uploads/specializations/icon_physician.png">
+                                                    <h5>Primary Care Physician</h5>
                                                 </div>
                                             </label>
                                         </div>
                                         <div class="box_card">
                                             <label>
-                                                <input type="checkbox" disabled name="product" class="card-input-element" value="Dentist" v-model="form.specialize">
+                                                <input type="checkbox" disabled name="product" class="card-input-element" value="Dentists" v-model="form.specialize">
                                                 <div class="panel panel-default card-input">
-                                                    <img src="/uploads/specializations/icon_dentist.png">
-                                                    <h5>Dentist</h5>
+                                                    <img src="uploads/specializations/icon_dentist.png">
+                                                    <h5>Dentists</h5>
                                                 </div>
                                             </label>
                                         </div>
@@ -72,16 +72,16 @@
                                             <label>
                                                 <input type="checkbox" disabled name="product" class="card-input-element" value="Internists" v-model="form.specialize">
                                                 <div class="panel panel-default card-input">
-                                                    <img src="/uploads/specializations/icon_internists.png">
+                                                    <img src="uploads/specializations/icon_internists.png">
                                                     <h5>Internists</h5>
                                                 </div>
                                             </label>
                                         </div>
                                         <div class="box_card">
                                             <label>
-                                                <input type="checkbox" disabled name="product" class="card-input-element" value="Traumatology" v-model="form.specialize">
+                                                <input type="checkbox" disabled name="product" class="card-input-element" value="OBGYN" v-model="form.specialize">
                                                 <div class="panel panel-default card-input">
-                                                    <img src="/uploads/specializations/icon_obgyn.png">
+                                                    <img src="uploads/specializations/icon_obgyn.png">
                                                     <h5>OBGYN</h5>
                                                 </div>
                                             </label>
@@ -99,7 +99,7 @@
                                         </div>
                                         <div class="box_card">
                                             <label>
-                                                <input type="checkbox" disabled name="product" class="card-input-element" value="Internists" v-model="form.specialize">
+                                                <input type="checkbox" name="product" class="card-input-element" value="Internists" v-model="form.specialize">
                                                 <div class="panel panel-default card-input">
                                                     <img src="images/Internists.png">
                                                     <h5>Internists</h5>
@@ -108,7 +108,7 @@
                                         </div>
                                         <div class="box_card">
                                             <label>
-                                                <input type="checkbox" disabled name="product" class="card-input-element" value="Osteopaths" v-model="form.specialize">
+                                                <input type="checkbox" name="product" class="card-input-element" value="Osteopaths" v-model="form.specialize">
                                                 <div class="panel panel-default card-input">
                                                     <img src="images/Osteopaths.png">
                                                     <h5>Osteopaths</h5>
@@ -117,7 +117,7 @@
                                         </div>
                                         <div class="box_card">
                                             <label>
-                                                <input type="checkbox" disabled name="product" class="card-input-element" value="Podiatrists" v-model="form.specialize">
+                                                <input type="checkbox" name="product" class="card-input-element" value="Podiatrists" v-model="form.specialize">
                                                 <div class="panel panel-default card-input">
                                                     <img src="images/Podiatrists.png">
                                                     <h5>Podiatrists</h5>
@@ -146,69 +146,63 @@
                                 </div>
                                 <div class="insurances ">
                                     <h4 class="h4_tittle">What insurances do you accept? </h4>
-                                    <div class="inputs_telemedicine insurances_inputs">
+                                    <div class="inputs_telemedicine insurances_inputs profile_insurances">
                                         <div class="check_inputs_all">
                                             <form>
                                                 <label>
-                                                    <input type="checkbox" disabled value="United Health" v-model="form.insurances">United Health
+                                                    <input type="checkbox" disabled value="Blue Cross Blue Shield" v-model="form.insurances">Blue Cross Blue Shield
+                                                </label>
+                                                <label>
+                                                    <input type="checkbox" disabled value="United Healthcare" v-model="form.insurances">United Healthcare
+                                                </label>
+                                                <label>
+                                                    <input type="checkbox" disabled value="HealthPartners" v-model="form.insurances">HealthPartners
                                                 </label>
                                                 <label>
                                                     <input type="checkbox" disabled value="Kaiser Foundation" v-model="form.insurances">Kaiser Foundation
                                                 </label>
                                                 <label>
-                                                    <input type="checkbox" disabled value="Anthem Inc" v-model="form.insurances">Anthem Inc
+                                                    <input type="checkbox" disabled value="Anthem, Inc." v-model="form.insurances">Anthem, Inc.
                                                 </label>
                                                 <label>
-                                                    <input type="checkbox" disabled value="Centene Corporation" v-model="form.insurances">Centene Corporation
+                                                    <input type="checkbox" disabled value="Centene Corp" v-model="form.insurances">Centene Corp
                                                 </label>
                                                 <label>
                                                     <input type="checkbox" disabled value="Humana" v-model="form.insurances">Humana
+                                                </label>   
+                                            </form>
+                                        </div>
+                                        <div class="check_inputs_all ">
+                                            <form>
+                                                <label>
+                                                    <input type="checkbox" disabled value="Molina Healthcare, Inc." v-model="form.insurances">Molina Healthcare, Inc.
                                                 </label>
                                                 <label>
                                                     <input type="checkbox" disabled value="CVS" v-model="form.insurances">CVS
                                                 </label>
-                                            </form>
-                                        </div>
-                                        <div class="check_inputs_all">
-                                            <form>
+                                                <label>
+                                                    <input type="checkbox" disabled value="Independence Health Group" v-model="form.insurances">Independence Health Group
+                                                </label>
                                                 <label>
                                                     <input type="checkbox" disabled value="HCSC" v-model="form.insurances">HCSC
                                                 </label>
                                                 <label>
-                                                    <input type="checkbox" disabled value="CIGNA" v-model="form.insurances">CIGNA
+                                                    <input type="checkbox" disabled value="Aetna" v-model="form.insurances">Aetna
                                                 </label>
                                                 <label>
-                                                    <input type="checkbox" disabled value="Molina Healthcare" v-model="form.insurances">Molina Healthcare
+                                                    <input type="checkbox" disabled value="Cigna Health" v-model="form.insurances">Cigna Health
                                                 </label>
                                                 <label>
-                                                    <input type="checkbox" disabled value="Independence Health" v-model="form.insurances">Independence Health
+                                                    <input type="checkbox" disabled value="Other" v-model="form.insurances" @change="insuranceHandler($event)">Other
                                                 </label>
-                                                <label>
-                                                    <input type="checkbox" disabled value="Guidewell Mutual" v-model="form.insurances">Guidewell Mutual
-                                                </label>
-                                                <label>
-                                                    <input type="checkbox" disabled value="Highmark Group" v-model="form.insurances">Highmark Group
-                                                </label>
+                                                <div class="insurances_rep" v-if="others">
+                                                    <div  v-for="(doc,index) in form.other_insurance" :key="index" class="other_in">
+                                                        <input type="text" v-model="form.other_insurance[index]"/>
+                                                        <span v-if="index > 0 " @click="removeInsurance(index)">X</span>
+                                                        <span v-else @click="repeatInsurance($event)">+</span>
+                                                    </div>
+                                                </div>
                                             </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="patients">
-                                    <div class="btn_inputs_select">
-                                        <div class="label">
-                                            <input type="checkbox" disabled id="age-25-40" value="Age-25-40" v-model="form.tags">
-                                            <label for="age-25-40">Age 25-40
-                                            </label>
-                                        </div>
-                                        <div class="label">
-                                            <input type="checkbox" disabled id="age-40-60" value="Age-40-60" v-model="form.tags">
-                                            <label for="age-40-60">Age 40-60
-                                            </label>
-                                        </div>
-                                        <div class="label">
-                                            <input type="checkbox" disabled id="age-60" value="Age-60+" v-model="form.tags">
-                                            <label for="age-60">Age 60+
-                                            </label>
                                         </div>
                                     </div>
                                 </div>
@@ -254,22 +248,33 @@
                 UserBar
             },
             props: ['profile', 'user', 'doctor'],
+            
             data() {
                 return { 
                     success: "",             
                     error: "",                
                     loading: false,  
+                    others: (this.profile.insurance.includes("Other"))? true:false,
                     form: { 
                         specialize: [],                                                            
-                        insurances: [],   
+                        //insurances: [],   
                         male: "",
                         female: "",
                         other: "",                                                         
-                        image: "",                                                         
+                        image: "",
+                        insurances: this.profile.insurance,
+                        other_insurance: (this.profile.other_insurance)? this.profile.other_insurance: ['']   
+                        //other_insurance: (this.profile.other_insurance)? this.profile.other_insurance: ['']                                                      
                     },
                 }
             },
             methods: {    
+                repeatInsurance(e){
+                    this.form.other_insurance.push("");
+                },
+                removeInsurance(index){
+                    this.form.other_insurance.splice(index, index);  
+                },
                 accept(data) {              
                     this.success = "";         
                     axios.post('/approve-doctor', { id: data.id })
@@ -285,7 +290,7 @@
                 },
                 reject(data) {
                     this.success = "";
-                    axios.post('/disapprove-doctor', { id: data.id })
+                    axios.post('/admin/disapprove-doctor', { id: data.id })
                     .then(response => {
                         this.success = response.data.message;
                         this.doctor.status = 2;
@@ -316,7 +321,7 @@
                 this.success = "";     
                 this.loading = true;  
                 console.log('this.form', this.form)         
-                axios.post('/update-profile', this.form)
+                axios.post('/admin/update-profile', this.form)
                         .then(response => {
                             if(response.data.status) {
                             this.success = response.data.message
@@ -335,7 +340,7 @@
                 },          
             },
             mounted() { 
-                console.log(this.doctor.profile_photo_url);
+                
                 if(this.profile) {
                     this.form = this.profile
                     this.form.specialize = this.profile.specialization
@@ -344,6 +349,13 @@
                     this.form.female = (this.profile.patients_gender) ? this.profile.patients_gender.female : ""
                     this.form.other =(this.profile.patients_gender) ? this.profile.patients_gender.other : ""
                 }
+
+                if(this.form.other_insurance.length < 1){
+                    this.form.other_insurance.push("");
+                }
+
+                console.log(this.form, "sdsads");
+
             }
         }
     </script>

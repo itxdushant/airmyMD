@@ -51,7 +51,7 @@
                                              <div class="custom_time">
                                                 <div class="row">
                                                    <div class="t_tm col-md-3">
-                                                      <input type="time" name="start_time" pattern="^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$" class="form-control start_time" v-model="time.start_time">
+                                                      <input type="time" name="start_time" pattern="^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$" class="form-control start_time" v-model="time.start_time" min="1">
                                                       <div class="arrows-wrapper"></div>
                                                    </div>
                                                    <div class="to col-md-1 text-center">To</div>

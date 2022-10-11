@@ -7,7 +7,8 @@
          <a href="/"><img src="/images/logo.png"></a>
       </div>
       <ul class="left_links">
-         <li> <Link href="/doctors"><img src="/images/patients.png">Doctors</Link></li>
+         <li :class="(urlsigment)? ((urlsigment.includes('doctors'))? 'active': ''): ''"> <Link href="/admin/doctors"><img src="/images/patients.png">Doctors</Link></li>
+         <li :class="(urlsigment)? ((urlsigment.includes('transactions'))? 'active': ''): ''"> <Link href="/admin/transactions"><img src="/images/list.png">Transactions</Link></li>
          <!-- <li> <Link href="/profile"><img src="/images/profile.png">Profile</Link></li>
          <li> <Link href="/appointments"><img src="/images/calender.png">My Appointments</Link> </li>
          <li> <Link href="/appointment-requests"><img src="/images/calender.png">Appointments Request</Link> </li>
@@ -23,3 +24,28 @@
       </ul>
    </div>
 </template>
+
+<script>
+   export default {
+      components: {
+      },
+      props: [],
+      data() {
+         return { 
+            urlsigment: null,
+            dashboardActive:null
+         }
+      },
+      methods: {  
+         
+      },
+      mounted() { 
+         const pathname = window.location.pathname;
+         this.urlsigment = pathname.split('/');
+         if(!this.urlsigment[2]){
+            this.dashboardActive = "active";
+         }
+
+      }
+    }
+</script>

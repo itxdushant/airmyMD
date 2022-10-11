@@ -73,7 +73,7 @@
                                     <div class="specialization_card">
                                         <div class="box_card">
                                             <label>
-                                                <input type="checkbox" name="product" class="card-input-element" value="Primary Care Primary Care Physician" v-model="form.specialize">
+                                                <input type="checkbox" name="product" class="card-input-element" value="Primary Care Physician" v-model="form.specialize">
                                                 <div class="panel panel-default card-input">
                                                     <img src="uploads/specializations/icon_physician.png">
                                                     <h5>Primary Care Physician</h5>

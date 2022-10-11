@@ -57,14 +57,14 @@
                   <div class="overlay" v-if="showModal" @click="showModal = false"></div>
                   <div class="vue-modal" v-if="showModal">
                      <button class="close" @click="showModal = false">x</button>
-                     <p><b>Patient Name: </b> <span><a :href="'/patient/'+bookingDetails.user_id">{{bookingDetails.user.patient_profile.first_name}} {{bookingDetails.user.patient_profile.last_name}}</a></span></p>
-                     <p><b>Appointment Date: </b> <span>{{(bookingDetails)? moment(bookingDetails.booking_date): ''}}</span></p>
-                     <p><b>Appointment Time: </b> <span>{{bookingDetails.booking_time}}</span></p>
-                     <p><b>Payment Type: </b> <span>{{bookingDetails.payment_type}}</span></p>
-                     <p><b>Paid Amount: </b> <span>${{bookingDetails.fees}}</span></p>
-                     <p><b>Payment Type: </b> <span>{{bookingDetails.payment_type}}</span></p>
-                     <p v-if="bookingDetails.payment_type == 'insurance'"><b>Insurance: </b> 
-                        <table class="table" v-if="bookingDetails.patient_insurance.length > 0">
+                     <p><b>Patient Name: </b> <span><a :href="'/patient/'+bookingDetails.booking.user_id">{{bookingDetails.booking.user.patient_profile.first_name}} {{bookingDetails.booking.user.patient_profile.last_name}}</a></span></p>
+                     <p><b>Appointment Date: </b> <span>{{(bookingDetails)? moment(bookingDetails.booking.booking_date): ''}}</span></p>
+                     <p><b>Appointment Time: </b> <span>{{bookingDetails.booking.booking_time}}</span></p>
+                     <p><b>Payment Type: </b> <span>{{bookingDetails.booking.payment_type}}</span></p>
+                     <p><b>Paid Amount: </b> <span>${{bookingDetails.total_amount}}</span></p>
+                     <p><b>Payment Type: </b> <span>{{bookingDetails.booking.payment_type}}</span></p>
+                     <p v-if="bookingDetails.booking.payment_type == 'insurance'"><b>Insurance: </b> 
+                        <table class="table" v-if="bookingDetails.booking.patient_insurance.length > 0">
                            <thead>
                               <tr>
                                  <th>Image</th>
@@ -74,7 +74,7 @@
                               </tr>
                            </thead>
                            <tbody>
-                              <tr v-for="(insurance,index) in bookingDetails.patient_insurance" :key="index">
+                              <tr v-for="(insurance,index) in bookingDetails.booking.patient_insurance" :key="index">
                                  <td class="insurance-img">
                                     <a :href="insurance.image" target="_blank"><img :src="insurance.image"/></a>
                                  </td>
@@ -107,9 +107,9 @@
                         </thead>
                         <tbody role="rowgroup" v-if="!loading">
                            <tr role="row" v-for="(doc,index) in bookings.data" :key="index">
-                              <td role="cell">{{doc.user.patient_profile.first_name}} {{doc.user.patient_profile.last_name}}</td>
-                              <td role="cell">{{moment(doc.booking_date)}}</td>
-                              <td role="cell">${{doc.fees}}</td>
+                              <td role="cell">{{doc.booking.user.patient_profile.first_name}} {{doc.booking.user.patient_profile.last_name}}</td>
+                              <td role="cell">{{moment(doc.booking.booking_date)}}</td>
+                              <td role="cell">${{doc.total_amount}}</td>
                               <td role="cell">
                                  <a href="#" class="btn_view_details" @click="openModal(doc)">View Details</a>
                               </td>
@@ -168,7 +168,7 @@
       },
       methods: {  
          changeHandle(e){
-
+            console.log(e, "Okay you are inside");
             this.page = 1;
             if (this.timer) {
                clearTimeout(this.timer);
@@ -208,6 +208,7 @@
             this.loading = true;
             axios.get(`/transactions-list?page=${this.page}&keyword=${this.keyword}&date=${this.date}`).then(({data}) => {                     
                this.bookings = data
+               console.log(this.bookings, "sdfsdfsdfsfsfs");
                this.loading = false;
             }).catch(({ response })=>{
                this.loading = false;

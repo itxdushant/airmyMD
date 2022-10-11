@@ -29,9 +29,6 @@ const submit = () => {
 
 </script>
 <style scoped>
-    .login_section .mb-4 {
-        display: none;
-    }
     .login_section .mb-4.font-medium.text-sm.text-green-600 {
         display: block !important;
         color: red !important;

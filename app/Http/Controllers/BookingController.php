@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
- 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\PatientProfile;
 use Illuminate\Support\Facades\DB;
 use App\Models\Booking;
+use App\Models\Payment;
 use App\Models\Review;
 use Redirect;
 use Session;
@@ -202,21 +203,31 @@ class BookingController extends Controller
 
     public function transactionsList(Request $request)
     {
-        $bookings = Booking::with(['user', 'user.patientProfile', 'patientInsurance'])->where(['doctor_id' => Auth::user()->id]);
+        $user = Auth::user();
+        if($user->user_type == 'admin'){
+            $payment = Payment::with('booking', 'booking.user', 'booking.user.patientProfile', 'booking.patientInsurance')->where(['user_id' => Auth::user()->id, 'commission', '!=', 0]);
+        }else{
+            $payment = Payment::with('booking', 'booking.user', 'booking.user.patientProfile', 'booking.patientInsurance')->where(['doctor_id' => Auth::user()->id, 'commission' => 0]);
+        }
+        
+        //$bookings = Booking::with(['user', 'user.patientProfile', 'patientInsurance'])->where(['doctor_id' => Auth::user()->id]);
 
         if($request->filled('keyword')) {
             $keyword = $request->keyword;
-            $bookings->whereHas('user.patientProfile', function($q) use($keyword) {
+            $payment->whereHas('booking.user.patientProfile', function($q) use($keyword) {
                 $q->where(DB::raw("concat(first_name, ' ', last_name)"), 'LIKE', "%".$keyword."%");
             });
         }
 
         if($request->filled('date') ){
-            $bookings->where('booking_date', $request->date);
+            $date = $request->date;
+            $payment->whereHas('booking', function($q) use($date) {
+                $q->where('booking_date', $date);
+            });
         }
-        $bookings = $bookings->paginate(20);
+        $payments = $payment->paginate(20);
 
-        return response()->json($bookings);
+        return response()->json($payments);
     }
 
     public function accept(Request $request)

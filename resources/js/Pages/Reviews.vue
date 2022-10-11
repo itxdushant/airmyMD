@@ -5,34 +5,45 @@
         <!-- left_bar end here -->
         
         <div class="card_review_section" v-if="!loading">
+            <div class="top_bar_c pb-50">
+                <h3 class="h3_tittle ">Reviews</h3>
+                <div class="right_top_input">
+                    <!-- <label for="search">
+                        <input type="search" name="search">
+                        <img src="images/search_1.png">
+                    </label> -->
+                    <UserBar/>
+                </div>
+            </div>
             <div class="review-outer" v-if="reviews">
                 <div class="card_review" v-for="(review,index) in reviews.data" :key="index">
                     <div class="img_text_name">
                         <div class="left_img_rt">
                             <img :src="(review.patient_profile)? review.patient_profile.profile_photo_url: 'https://images.ctfassets.net/hrltx12pl8hq/7JnR6tVVwDyUM8Cbci3GtJ/bf74366cff2ba271471725d0b0ef418c/shutterstock_376532611-og.jpg'">
-                            <h3 class="name_reviewer">{{(review.patient_profile.patient_profile.first_name)? review.patient_profile.patient_profile.first_name:''}} {{(review.patient_profile.patient_profile.last_name)? ' '+review.patient_profile.patient_profile.last_name:''}}</h3>
-                            <span class="date_review">{{moment(review.created_at)}}</span>
+                            <h4 class="name_reviewer">{{(review.patient_profile.patient_profile.first_name)? review.patient_profile.patient_profile.first_name:''}} {{(review.patient_profile.patient_profile.last_name)? ' '+review.patient_profile.patient_profile.last_name:''}}</h4>
+                            <p class="p_msg">
+                                {{(review.review)? review.review:'Review not given.'}}
+                                
+                            </p>
                         </div>
                         
                         <div class="right_star_rt">
-                            <fieldset class="rate" v-if="review.rating > 0">
+                            <span class="date_review">{{moment(review.created_at)}}</span>
+                            <fieldset class="rate">
                                 <input type="radio" :name="review.id" value="10" disabled :checked="(review.rating == 5)? true: false"/><label  title="5 stars"></label>
-                            <input type="radio" :name="review.id" value="9" disabled :checked="(review.rating == 4.5)? true: false"/><label class="half"  title="4 1/2 stars"></label>
-                            <input type="radio" :name="review.id" value="8" disabled :checked="(review.rating == 4)? true: false"/><label  title="4 stars"></label>
-                            <input type="radio" :name="review.id" value="7" disabled :checked="(review.rating == 3.5)? true: false"/><label class="half"  title="3 1/2 stars"></label>
-                            <input type="radio" :name="review.id" value="6" disabled :checked="(review.rating == 3)? true: false"/><label  title="3 stars"></label>
-                            <input type="radio" :name="review.id" value="5" disabled :checked="(review.rating == 2.5)? true: false"/><label class="half"  title="2 1/2 stars"></label>
-                            <input type="radio" :name="review.id" value="4" disabled :checked="(review.rating == 2)? true: false"/><label  title="2 stars"></label>
-                            <input type="radio" :name="review.id" value="3" disabled :checked="(review.rating == 1.5)? true: false"/><label class="half"  title="1 1/2 stars"></label>
-                            <input type="radio" :name="review.id" value="2" disabled :checked="(review.rating == 1)? true: false"/><label  title="1 star"></label>
-                            <input type="radio" :name="review.id" value="1" disabled :checked="(review.rating == 0.5)? true: false"/><label class="half" title="1/2 star"></label>
+                                <input type="radio" :name="review.id" value="9" disabled :checked="(review.rating == 4.5)? true: false"/><label class="half"  title="4 1/2 stars"></label>
+                                <input type="radio" :name="review.id" value="8" disabled :checked="(review.rating == 4)? true: false"/><label  title="4 stars"></label>
+                                <input type="radio" :name="review.id" value="7" disabled :checked="(review.rating == 3.5)? true: false"/><label class="half"  title="3 1/2 stars"></label>
+                                <input type="radio" :name="review.id" value="6" disabled :checked="(review.rating == 3)? true: false"/><label  title="3 stars"></label>
+                                <input type="radio" :name="review.id" value="5" disabled :checked="(review.rating == 2.5)? true: false"/><label class="half"  title="2 1/2 stars"></label>
+                                <input type="radio" :name="review.id" value="4" disabled :checked="(review.rating == 2)? true: false"/><label  title="2 stars"></label>
+                                <input type="radio" :name="review.id" value="3" disabled :checked="(review.rating == 1.5)? true: false"/><label class="half"  title="1 1/2 stars"></label>
+                                <input type="radio" :name="review.id" value="2" disabled :checked="(review.rating == 1)? true: false"/><label  title="1 star"></label>
+                                <input type="radio" :name="review.id" value="1" disabled :checked="(review.rating == 0.5)? true: false"/><label class="half" title="1/2 star"></label>
                             </fieldset>
-                            <span v-else>Rating not given.</span>
                         </div>                
                     </div>
-                    <p class="p_msg">
-                        {{review.review}}
-                    </p>
+                    
                 </div>
                 
                 <!-- <div class="card_review">
@@ -100,6 +111,9 @@
     <style scoped>
         /* Base setup */
         @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+        .review-outer {
+            margin-top: 20px;
+        }
     </style>
 <script>
     import SideBar from '@/Components/SideBar'

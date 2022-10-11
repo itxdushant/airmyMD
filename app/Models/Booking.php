@@ -28,6 +28,15 @@ class Booking extends Model
         'source_name',
         'transfer_group',
     ];
+    
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'payment_count',
+    ];
 
     public function user()
     {
@@ -38,17 +47,23 @@ class Booking extends Model
     {
         return $this->hasOne(Profile::class, 'user_id', 'doctor_id');
     }
-
+    
     public function patientInsurance()
     {
         return $this->hasMany(PatientInsurance::class, 'id', 'source_id');
     }
-
+    
     public function review()
     {
         return $this->hasOne(Review::class, 'booking_id', 'id');
     }
-
-
-
+    
+    public function payments()
+    {
+        return $this->hasMany(Payment::class, 'booking_id', 'id');
+    }
+    
+    public function getPaymentCountAttribute(){
+        return Payment::where('booking_id', $this->id)->count();
+    }
 }

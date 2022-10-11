@@ -59,9 +59,18 @@
                                         <td><strong>Weight:</strong></td>
                                         <td>{{(patient.patient_profile.weight)? patient.patient_profile.weight: ''}}</td>
                                     </tr>
-                                    <tr v-if="patient.patient_profile.gender">
+                                    <tr v-if="patient.patient_profile.marital_status">
                                         <td><strong>Marital Status:</strong></td>
+                                        <td>{{(patient.patient_profile.marital_status)? patient.patient_profile.marital_status: ''}}</td>
+                                    </tr>
+                                    <tr v-if="patient.patient_profile.gender">
+                                        <td><strong>Gender:</strong></td>
                                         <td>{{(patient.patient_profile.gender)? patient.patient_profile.gender: ''}}</td>
+                                    </tr>
+
+                                    <tr v-if="patient.patient_profile.dob">
+                                        <td><strong>Date Of Birth:</strong></td>
+                                        <td>{{(patient.patient_profile.dob)? moment(patient.patient_profile.dob): ''}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -278,6 +287,18 @@
                                     <input type="checkbox" disabled :checked="(patient.patient_profile.surgeries && patient.patient_profile.surgeries.includes('Kidney Disease') )? 'checked': false">
                                     <span class="checkmark"></span>
                                 </label>
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Year:</strong></td>
+                                            <td><strong>Age:</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{patient.patient_profile.year}}</td>
+                                            <td>{{patient.patient_profile.age}}</td>
+                                        </tr>
+                                    </tbody>
+                               </table>
 
                             </div>
                         </div>
@@ -477,7 +498,7 @@
                             </div>
                         </div>
                         <div v-else-if="item.id==10" class="tobacco-aco row">
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                                 <span><strong>Drink Alcohol</strong></span>
                                 <label class="container">No
                                     <input type="checkbox" disabled :checked="(patient.patient_profile.drink_alcohol && patient.patient_profile.drink_alcohol.includes('No') )? 'checked': false">
@@ -498,6 +519,26 @@
                                     <input type="checkbox" disabled :checked="(patient.patient_profile.drink_alcohol && patient.patient_profile.drink_alcohol.includes('2-4 Time/Month') )? 'checked': false">
                                     <span class="checkmark"></span>
                                 </label>
+                                <div class="" v-if="(patient.patient_profile.drink_alcohol && ( patient.patient_profile.drink_alcohol.includes('Yes') || patient.patient_profile.drink_alcohol.includes('0-1 Time/Month') || patient.patient_profile.drink_alcohol.includes('2-4 Time/Month') ) )">
+                                    <table class="table">
+                                        <thead>
+                                            <th>Serving Of Beer</th>
+                                            <th>Glasses Of Wine</th>
+                                            <th>Shots/Mixed Drinks</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{(this.how_many.length > 0 )? this.how_many[0] : ''}}</td>
+                                                <td>{{(this.how_many.length > 1 )? this.how_many[1] : ''}}</td>
+                                                <td>{{(this.how_many.length > 2 )? this.how_many[2] : ''}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <label v-if="patient.patient_profile.drinks_in_day">When did you last have more then 4 drinks in one day?: <span>{{patient.patient_profile.drinks_in_day}}</span></label>
+                                    <label v-if="patient.patient_profile.cut_down">Do you feel you should cut down on drinking?: <span>{{patient.patient_profile.cut_down}}</span></label>
+                                    <label v-if="patient.patient_profile.felt_guilty">Have you ever felt guilty about drinking?: <span>{{patient.patient_profile.felt_guilty}}</span></label>
+                                    <label v-if="patient.patient_profile.morning_drink">Have you ever have a morning drink to steady your nerves?: <span>{{patient.patient_profile.morning_drink}}</span></label>                                    
+                                </div>
                             </div>
                         </div>
                         <div v-else-if="item.id==11" class="tobacco-aco row">
@@ -677,7 +718,7 @@ hr {
    import SideBar from '@/Components/SideBar'
    import UserBar from '@/Components/UserBar'
    import LaravelVuePagination from 'laravel-vue-pagination';
-   
+   import moment from 'moment';
 
    export default {
       components: {
@@ -687,7 +728,8 @@ hr {
       },
       props: ['patient'],
       data() {
-        return {        
+        return { 
+        how_many: [],
         items: [
             {
                 id: 1,
@@ -765,6 +807,9 @@ hr {
         }
     },
     methods: {
+        moment: function (date) {
+            return moment(date).format('MMMM DD, YYYY');
+        },
         toggleExpand(item) {
         item.isExpand = !item.isExpand;
         },
@@ -789,8 +834,10 @@ hr {
     },
     mounted() {
         this.getComputedHeight();
-        
-        console.log(this.patient, "this is testing");
+        if(this.patient.patient_profile.how_many){
+            this.how_many = this.patient.patient_profile.how_many.split(",");
+        }
+        console.log(this.how_many, "this is testing");
     },
     }
 </script>

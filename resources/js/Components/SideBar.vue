@@ -16,6 +16,7 @@
          <li :class="(urlsigment)? ((urlsigment.includes('patients'))? 'active': ''): ''"> <Link href="/patients"><img src="/images/patients.png">Patients</Link> </li>
          <li :class="(urlsigment)? ((urlsigment.includes('transactions'))? 'active': ''): ''"> <Link href="/transactions"><img src="/images/list.png">Transactions</Link></li>
          <li :class="(urlsigment)? ((urlsigment.includes('chat'))? 'active': ''): ''"> <a href="/chat"><img src="/images/message.png">Messages</a></li>
+         <li :class="(urlsigment)? ((urlsigment.includes('reviews'))? 'active': ''): ''"> <Link href="/reviews"><img src="/images/message.png">Reviews</Link></li>
          <li :class="(urlsigment)? ((urlsigment.includes('account'))? 'active': ''): ''"> <Link href="/account"><img src="/images/profile_2.png">Account</Link></li>
       </ul>
       <ul class="log_out left_links">

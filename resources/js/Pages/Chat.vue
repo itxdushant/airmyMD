@@ -32,6 +32,7 @@
                      <div class="" v-if="(conversion && conversion.length != 0) ">
                         <div v-for="(user,index) in conversion" :key="index" :class="(user.id == active)? 'persons_chats active': 'persons_chats'" >
                            <img :src="(user.profile_photo_url)? user.profile_photo_url :'/images/chat_1.png'" @click="selectUser(user.id)" class="pr_img"/>
+                           <span v-if="user.latest_msg && user.latest_msg.is_read ==0 && user.latest_msg.to == this.user_id && is_read" class="is_read">{{user.unread}}</span>
                            <div class="name_t" @click="selectUser(user.id)">
                                  <h4 class="name_p" v-if="user.user_type == 'user'">{{ (user.patient_profile)? user.patient_profile.first_name+' '+user.patient_profile.last_name: '' }} </h4>
                                  <h4 class="name_p" v-else>{{ (user.profile)? user.profile.first_name+' '+user.profile.last_name: '' }} </h4>
@@ -45,7 +46,7 @@
 
                   </div>
                   
-                     <div class="right_side" v-if="allMsgs">
+                     <div class="right_side" v-if="allMsgs && active">
                         <div class="row text-center" v-if="loading2">
                            <div class="spinner-border" role="status" style="margin:50px auto;">
                            </div>
@@ -164,6 +165,7 @@
             loading: false, 
             loading2: false,
             height: 0,
+            is_read: true,
             keyChange: false,
             msgData: {
                text_msg: null,
@@ -258,6 +260,7 @@
             this.msgData.images.splice(index, 1)
          },
          selectUser(user_id, page=0){
+            this.is_read = false;
             this.active = user_id;
             this.msgData.user_id = user_id;
             axios.post('/get-messages', {user_id: this.msgData.user_id, page:page } )
@@ -303,8 +306,7 @@
          },
       },
       mounted() { 
-         console.log(document.querySelector('.right_side'));
-         console.log(this.doctor, "Hettete");
+         console.log(this.conversion, "dfgdfgd");
          if(this.selected_id != 0){
             this.selectUser(this.selected_id);
          }
@@ -312,7 +314,11 @@
          Echo.private('chat')
          .listen('MessageSent', (e) => {
             if(e.message){
-               console.log(e.message, "ooooooooooooooo");
+               if(e.recentMsg){
+                  console.log(e, "dsfsdfsdfsdfsd");
+                  let myElement = document.getElementById(e.user+'l_message');
+                  myElement.innerHTML = e.recentMsg;
+               }
                this.allMsgs = e.message.message;
             }
             
